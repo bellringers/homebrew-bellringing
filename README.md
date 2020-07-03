@@ -7,13 +7,13 @@ Mac Homebrew formulae for bell ringing related software.
 Tap it:
 
 ```bash
-$ brew tap bellringers/bellringing
+brew tap bellringers/bellringing
 ```
 
 Then install stuff from it:
 
 ```bash
-$ brew install handbellmanagermac
+brew install handbellmanagermac
 ```
 
 ## License
