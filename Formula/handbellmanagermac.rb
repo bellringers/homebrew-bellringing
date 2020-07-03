@@ -1,10 +1,17 @@
 class Handbellmanagermac < Formula
+  include Language::Python::Virtualenv
+
   desc "Input manager for motion controllers for use with bell ringing software"
   homepage "https://github.com/SimonGay/HandbellManagerMac"
   url "https://github.com/SimonGay/HandbellManagerMac/archive/v0.1.0.tar.gz"
-  sha256 "whatever"
+  sha256 "713e030b2efcae7ae1f3f00595209768ec41cf891df7490f54952d5303092b86"
 
-  depends_on "python"
+  depends_on "portmidi"
+  depends_on "python@3.8"
+  depends_on "sdl"
+  depends_on "sdl_image"
+  depends_on "sdl_mixer"
+  depends_on "sdl_ttf"
 
   resource "pygame" do
     url "https://files.pythonhosted.org/packages/0f/9c/78626be04e193c0624842090fe5555b3805c050dfaa81c8094d6441db2be/pygame-1.9.6.tar.gz"
@@ -35,9 +42,14 @@ class Handbellmanagermac < Formula
     url "https://files.pythonhosted.org/packages/6b/34/415834bfdafca3c5f451532e8a8d9ba89a21c9743a0c59fbd0205c7f9426/six-1.15.0.tar.gz"
     sha256 "30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259"
   end
-  
+
   def install
-    virtualenv_install_with_resources
+    venv = virtualenv_create(libexec, Formula["python@3.8"].bin/"python3.8")
+    venv.pip_install resources
+  end
+
+  def test
+    assert_match version.to_s, shell_output("#{bin}/handbell-manager --version")
   end
 
 end
