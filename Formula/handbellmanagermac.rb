@@ -46,6 +46,8 @@ class Handbellmanagermac < Formula
   def install
     venv = virtualenv_create(libexec, Formula["python@3.8"].bin/"python3.8")
     venv.pip_install resources
+    bin.install "HandbellManagerMac.py"
+    bin.install "handbell-manager"
   end
 
   def test
